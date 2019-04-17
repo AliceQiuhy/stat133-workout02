@@ -55,7 +55,8 @@ ui <- fluidPage(
      column(4,
             selectInput("facet",
                         "Facet?",
-                        c("Yes", "No"))),
+                        c("Yes", "No"),
+                        selected = "No")),
     
 
       # Show a plot of the generated distribution
@@ -155,7 +156,7 @@ server <- function(input, output) {
      } else if (input$facet == "Yes") {
        ymax <- max(dat()[,'growing_contrib'])
        ggplot(data = plot_dat(), aes(x = year, y = balance, color = mode)) +
-         geom_point(size = 1) + geom_line() + geom_area(aes(x = year, y = balance, fill = mode, alpha = 0.7)) +
+         geom_point(size = 1) + geom_line() + geom_area(aes(x = year, y = balance, fill = mode), alpha = 0.6) +
          facet_wrap(~mode)+
          scale_x_continuous(limits=c(0, input$year), breaks=seq(0, input$year, 2.5)) + 
          scale_y_continuous(limits=c(0, ymax), breaks=seq(0, ymax, 10000)) +
